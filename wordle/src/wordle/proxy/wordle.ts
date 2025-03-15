@@ -4,7 +4,7 @@ import { ATTEMPTS, WORD_LENGTH } from '../constants'
 import { KEY_MAP } from '../constants'
 import { toast } from 'react-toastify'
 
-enum GameState {
+export enum GameState {
     WON = "WON",
     PLAYING = "PLAYING",
     LOST = "LOST"
