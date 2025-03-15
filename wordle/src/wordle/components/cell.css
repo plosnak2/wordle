@@ -1,0 +1,27 @@
+.cell {
+    width: 52px;
+    height: 52px;
+    border-color: rgb(58, 58, 60);
+    border-width: 2px;
+    border-style: solid;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    color: white;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+
+    &.incorrect {
+        background-color: rgb(58, 58, 60);
+    }
+
+    &.wrong-position {
+        background-color: rgb(181, 159, 59);
+    }
+
+    &.correct {
+        background-color: rgb(83, 141, 78);
+    }
+}
