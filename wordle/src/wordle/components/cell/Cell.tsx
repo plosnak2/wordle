@@ -1,6 +1,6 @@
 import { useMemo } from "react"
-import { evaluateLetter, useWordle } from "../proxy/wordle"
 import "./cell.css"
+import { evaluateLetter, useWordle } from "../../proxy/wordle"
 
 type Props = {
     letter?: string

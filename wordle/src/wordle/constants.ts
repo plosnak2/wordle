@@ -30,4 +30,16 @@ export const KEY_MAP = {
     'KeyZ': 'Z',
     'Backspace': 'Backspace',
     'Enter': 'Enter',
-}
+} as const
+
+export const REVERSE_KEY_MAP = Object.fromEntries(
+    Object.entries(KEY_MAP).map(([key, value]) => [value, key])
+) as Record<string, keyof typeof KEY_MAP>;
+
+export type KeyType = (typeof KEY_MAP)[keyof typeof KEY_MAP]
+
+export const KEYBOARD_LAYOUT: KeyType[][] = [
+    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+    ['Enter','Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Backspace'],
+]

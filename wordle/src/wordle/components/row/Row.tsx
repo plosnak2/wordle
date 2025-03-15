@@ -1,5 +1,5 @@
-import { WORD_LENGTH } from "../constants"
-import Cell from "./Cell"
+import { WORD_LENGTH } from "../../constants"
+import Cell from "../cell/Cell"
 import "./row.css"
 
 type Props = {

@@ -1,8 +1,9 @@
 import { useEffect } from "react"
 import { handleKeyPress, loadRandomWord } from "../proxy/wordle"
 import "./wordlepage.css"
-import Board from "../components/Board"
+import Board from "../components/board/Board"
 import { KEY_MAP } from "../constants"
+import Keyboard from "../components/keyboard/Keyboard"
 
 
 const WordlePage = () => {
@@ -20,6 +21,7 @@ const WordlePage = () => {
     return (
         <div className="page">
             <Board />
+            <Keyboard />
         </div>
     )
 }

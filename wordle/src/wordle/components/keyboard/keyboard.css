@@ -1,0 +1,15 @@
+.keyboard {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    max-width: 484px;
+    width: 100%;
+}
+
+.keyboard-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 8px;
+    gap: 6px;
+}

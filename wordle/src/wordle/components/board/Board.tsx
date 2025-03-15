@@ -1,6 +1,6 @@
-import { ATTEMPTS } from "../constants";
-import { useWordle } from "../proxy/wordle";
-import Row from "./Row";
+import { ATTEMPTS } from "../../constants";
+import { useWordle } from "../../proxy/wordle";
+import Row from "../row/Row";
 import "./board.css";
 
 const Board = () => {
