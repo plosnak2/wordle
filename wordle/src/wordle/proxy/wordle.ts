@@ -1,5 +1,5 @@
 import { proxy, useSnapshot } from 'valtio'
-import fetchRandomWord from '../../api/api'
+import { fetchDictionaryWord, fetchRandomWord } from '../../api/api'
 import { ATTEMPTS, WORD_LENGTH } from '../constants'
 import { KEY_MAP } from '../constants'
 import { toast } from 'react-toastify'
@@ -30,11 +30,10 @@ export const useWordle = () => useSnapshot(wordleProxy)
 
 export const loadRandomWord = async () => {
     const word = await fetchRandomWord()
-    console.log(word)
     setWord(word)
 }
 
-export const handleKeyPress = (key: keyof typeof KEY_MAP) => {
+export const handleKeyPress = async (key: keyof typeof KEY_MAP) => {
     if (!gamePlaying()) {
         return
     }
@@ -51,7 +50,13 @@ export const handleKeyPress = (key: keyof typeof KEY_MAP) => {
         }
 
         if (currentAttempt.length !== WORD_LENGTH) {
-            toast.error("Too few characters :(")
+            toast.error("Too few characters 😢")
+            return
+        }
+
+        const res = await fetchDictionaryWord(currentAttempt)
+        if (res !== 200) {
+            toast.error("Not a valid word 😢")
             return
         }
 
