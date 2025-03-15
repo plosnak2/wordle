@@ -1,6 +1,7 @@
+import { useMemo } from "react"
 import Icon from "../../../icons/Icon"
 import { KeyType, REVERSE_KEY_MAP } from "../../constants"
-import { handleKeyPress } from "../../proxy/wordle"
+import { evaluateKey, handleKeyPress, useWordle } from "../../proxy/wordle"
 import "./key.css"
 
 type Props = {
@@ -8,11 +9,17 @@ type Props = {
 }
 
 const Key = ({ keyProp }: Props) => {
+    const { currentAttemptIndex, gameState } = useWordle()
     const handleClickKey = () => {
         handleKeyPress(REVERSE_KEY_MAP[keyProp])
     }
+
+    const keyClass = useMemo(() => {
+        return evaluateKey(keyProp) ?? ""
+    }, [currentAttemptIndex, gameState])
+
     return (
-        <div className="key" data-key={keyProp} onClick={handleClickKey}>
+        <div className={"key " + keyClass} data-key={keyProp} onClick={handleClickKey}>
             {keyProp === "Backspace" ? <Icon icon="backspace" size={20}/> : keyProp}
         </div>
     )

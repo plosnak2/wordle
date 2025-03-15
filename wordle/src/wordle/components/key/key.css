@@ -12,6 +12,18 @@
     max-width: 43px;
     color: white;
     cursor: pointer;
+
+    &.correct {
+        background-color: rgb(83, 141, 78);
+    }
+
+    &.wrong-position {
+        background-color: rgb(181, 159, 59);
+    }
+
+    &.incorrect {
+        background-color: rgb(58, 58, 60);
+    }
 }
 
 .key[data-key="Enter"],

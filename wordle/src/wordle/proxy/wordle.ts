@@ -21,7 +21,7 @@ const defaultState: WordleProxyState = {
     word: null,
     attempts: Array(ATTEMPTS).fill(''),
     currentAttemptIndex: 0,
-    gameState: GameState.PLAYING
+    gameState: GameState.PLAYING,
 }
 
 const wordleProxy = proxy<WordleProxyState>(defaultState)
@@ -103,15 +103,57 @@ export const evaluateLetter = (rowIndex: number, letterIndex: number, letter?: s
         return null
     }
 
-    if (wordleProxy.word[letterIndex].toLocaleLowerCase() === wordleProxy.attempts[rowIndex][letterIndex].toLocaleLowerCase()) {
+    if (wordleProxy.word[letterIndex].toLowerCase() === wordleProxy.attempts[rowIndex][letterIndex].toLowerCase()) {
         return "correct"
 
     }
 
-    if (wordleProxy.word.toLocaleLowerCase().includes(letter.toLocaleLowerCase())) {
+    if (wordleProxy.word.toLowerCase().includes(letter.toLowerCase())) {
         return "wrong-position"
     }
     return "incorrect"
+}
+
+export const evaluateKey = (key: string) => {
+    if (key === "Enter" || key === "Backspace") {
+        return ""
+    }
+
+    if (gameWon() && wordleProxy.word?.toLowerCase().includes(key.toLowerCase())) {
+        return "correct"
+    }
+
+    const previousAttempts = wordleProxy.attempts.slice(0, wordleProxy.currentAttemptIndex)
+
+    return resolveKeyPosition(previousAttempts, key)
+}
+
+const resolveKeyPosition = (attempts: string[], letter: string): string => {
+    let position = ""
+    if (wordleProxy.word?.toLowerCase().includes(letter.toLowerCase())) {
+        for(let i = 0; i < attempts.length; i++) {
+            if (attempts[i].toLowerCase().includes(letter.toLowerCase())) {
+                if (position !== "correct") { 
+                    position = "wrong-position"
+                } 
+            }
+
+            for(let j = 0; j < attempts[i].length; j++) {
+                if (attempts[i][j].toLocaleLowerCase() === letter.toLowerCase()) {
+                    if (wordleProxy.word[j].toLowerCase() === letter.toLowerCase()) {
+                        position = "correct"
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    if (position === "") {
+        position = attempts.some(attempt => attempt.toLowerCase().includes(letter.toLowerCase())) ? "incorrect" : ""
+    }
+
+    return position
 }
 
 const setWord = (word: string) => {
