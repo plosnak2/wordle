@@ -5,7 +5,7 @@ import Row from "../row/Row";
 import "./board.css";
 
 const Board = () => {
-    const { attempts } = useWordle()
+    const { attempts, gameState, word } = useWordle()
     return (
         <div className="board">
         {
@@ -13,7 +13,7 @@ const Board = () => {
                 <Row key={i} row={attempts[i]} rowIndex={i}/>
             ))
         }
-        <Badge />
+        <Badge gameState={gameState} word={word}/>
         </div>
     );
 }
