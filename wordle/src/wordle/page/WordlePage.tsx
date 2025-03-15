@@ -4,6 +4,7 @@ import "./wordlepage.css"
 import Board from "../components/board/Board"
 import { KEY_MAP } from "../constants"
 import Keyboard from "../components/keyboard/Keyboard"
+import Info from "../components/info/Info"
 
 
 const WordlePage = () => {
@@ -20,6 +21,7 @@ const WordlePage = () => {
 
     return (
         <div className="page">
+            <Info />
             <Board />
             <Keyboard />
         </div>

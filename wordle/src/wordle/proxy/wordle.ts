@@ -128,6 +128,15 @@ export const evaluateKey = (key: string) => {
     return resolveKeyPosition(previousAttempts, key)
 }
 
+export const resetGame = () => {
+    wordleProxy.word = null
+    wordleProxy.attempts = Array(ATTEMPTS).fill('')
+    wordleProxy.currentAttemptIndex = 0
+    wordleProxy.gameState = GameState.PLAYING
+
+    loadRandomWord()
+}
+
 const resolveKeyPosition = (attempts: string[], letter: string): string => {
     let position = ""
     if (wordleProxy.word?.toLowerCase().includes(letter.toLowerCase())) {

@@ -3,4 +3,5 @@
     gap: 5px;
     flex-direction: column;
     position: relative;
+    margin-top: 20px;
 }
